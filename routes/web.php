@@ -51,8 +51,8 @@ Route::prefix('backend/')->name('backend.')->group(function () {
         // Gallery
         Route::resource('gallery', GalleryController::class);
         Route::post('gallery/storeImage', [GalleryController::class, 'storeImage'])->name('gallery.storeImage');
-        Route::delete('gallery/deleteImage', [GalleryController::class, 'deleteImage'])->name('gallery.deleteImage');
-
+        Route::delete('gallery/{gallery}/deleteImage', [GalleryController::class, 'deleteImage'])->name('gallery.deleteImage');
+        Route::get('gallery/{gallery}/getImages', [GalleryController::class, 'getImages'])->name('gallery.getImages');
         // Slider
         Route::resource('slider', SliderController::class);
 

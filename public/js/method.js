@@ -213,14 +213,10 @@ function handle_confirm(title, confirm_title, deny_title, method, route) {
                 url: route,
                 dataType: 'json',
                 success: function (response) {
-                    if (response.redirect == "cart") {
-                        load_cart(localStorage.getItem("route_cart"));
-                    } else if (response.redirect == "reload") {
+                    Swal.fire(response.message, '', response.status).then((result) => {
                         location.reload();
-                    } else {
-                        load_list(1);
-                    }
-                    Swal.fire(response.message, '', response.status)
+                    });
+
                 }
             });
         } else if (result.isDenied) {

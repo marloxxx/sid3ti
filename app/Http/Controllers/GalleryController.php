@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gallery;
+use App\Models\Image as ImageModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Artesaos\SEOTools\Facades\JsonLd;
@@ -150,13 +151,26 @@ class GalleryController extends Controller
      */
     public function destroy(Gallery $gallery)
     {
-        unlink(public_path('images/gallery/' . $gallery->image));
+        foreach ($gallery->images as $image) {
+            $oldImage = public_path($image->image_path);
+            if (file_exists($oldImage)) {
+                unlink($oldImage);
+            }
+            $image->delete();
+        }
         $gallery->delete();
 
         return response()->json([
             'status' => 'success',
             'message' => 'Gallery deleted',
         ]);
+    }
+
+    public function getImages(Gallery $gallery)
+    {
+        // get all images except primary image
+        $images = $gallery->images()->get();
+        return response()->json($images);
     }
 
     public function storeImage(Request $request)
@@ -185,13 +199,13 @@ class GalleryController extends Controller
         ]);
     }
 
-    public function deleteImage(Request $request)
+    public function deleteImage(Request $request, Gallery $gallery)
     {
-        $image = Image::where('name', $request->name)->first();
+        $image = ImageModel::where('name', $request->name)->first();
         if ($image == null) {
             return;
         }
-        $oldImage = public_path('images/gallery/' . $image->image_path);
+        $oldImage = public_path($image->image_path);
         if (file_exists($oldImage)) {
             unlink($oldImage);
         }

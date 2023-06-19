@@ -163,7 +163,7 @@
             },
             init: function() {
                 var myDropzone = this;
-                $.get("{{ route('backend.gallery.getImages', $event->id) }}", function(data) {
+                $.get("{{ route('backend.gallery.getImages', $gallery->id) }}", function(data) {
                     $.each(data, function(key, value) {
                         var mockFile = {
                             name: value.name,
@@ -248,7 +248,7 @@
                 // Listen to the sendingmultiple event. In this case, it's the sendingmultiple event instead
                 // of the sending event because uploadMultiple is set to true.
                 this.on("sendingmultiple", function(files, xhr, formData) {
-                    formData.append('event_id', $('[name="event_id"]').val());
+                    formData.append('gallery_id', $('[name="gallery_id"]').val());
                 });
 
                 this.on("successmultiple", function(files, response) {
@@ -262,7 +262,7 @@
                         },
                     }).then(function(result) {
                         if (result.isConfirmed) {
-                            window.location.href = "{{ route('backend.events.index') }}";
+                            window.location.href = "{{ route('backend.gallery.index') }}";
                         }
                     });
                 });
@@ -271,6 +271,63 @@
                     // Gets triggered when there was an error sending the files.
                     // Maybe show form again, and notify user of error
                 });
+            },
+            removedfile: function(file) {
+                if (this.options.dictRemoveFile) {
+                    return Swal.fire({
+                        text: "Are you sure you want to remove this image?",
+                        icon: "warning",
+                        showCancelButton: true,
+                        buttonsStyling: false,
+                        confirmButtonText: "Yes, remove!",
+                        cancelButtonText: "No, cancel",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-danger",
+                            cancelButton: "btn fw-bold btn-active-light-primary",
+                        },
+                    }).then(function(result) {
+                        var name = file.name;
+                        $.ajax({
+                            headers: {
+                                'X-CSRF-TOKEN': token
+                            },
+                            type: 'POST',
+                            url: "{{ route('backend.gallery.deleteImage', $gallery->id) }}",
+                            data: {
+                                name: name,
+                                _token: token,
+                                _method: "DELETE"
+                            },
+                            success: function(response) {
+                                if (response.status == "success") {
+                                    Swal.fire({
+                                        text: response.message,
+                                        icon: "success",
+                                        buttonsStyling: false,
+                                        confirmButtonText: "Ok!",
+                                        customClass: {
+                                            confirmButton: "btn btn-primary",
+                                        },
+                                    });
+                                }
+                            },
+                            error: function(e) {
+                                Swal.fire({
+                                    text: e.message,
+                                    icon: "error",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Ok!",
+                                    customClass: {
+                                        confirmButton: "btn btn-primary",
+                                    },
+                                });
+                            }
+                        });
+                        var fileRef;
+                        return (fileRef = file.previewElement) != null ?
+                            fileRef.parentNode.removeChild(file.previewElement) : void 0;
+                    });
+                }
             }
         });
         // Class definition
