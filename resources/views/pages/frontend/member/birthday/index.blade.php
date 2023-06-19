@@ -1,4 +1,4 @@
-@extends('layouts.guest.master')
+@extends('layouts.frontend.master')
 @section('content')
     <!--begin::Toolbar-->
     <div class="toolbar py-5 py-lg-15" id="kt_toolbar">

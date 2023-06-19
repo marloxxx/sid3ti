@@ -218,11 +218,11 @@
     <!--end::Content-->
 @endsection
 @section('scripts')
-    <script src="guests/plugins/custom/fslightbox/fslightbox.bundle.js"></script>
-    <script src="guests/js/widgets.bundle.js"></script>
-    <script src="guests/js/custom/widgets.js"></script>
-    <script src="guests/js/custom/apps/chat/chat.js"></script>
-    <script src="guests/js/custom/utilities/modals/upgrade-plan.js"></script>
-    <script src="guests/js/custom/utilities/modals/create-app.js"></script>
-    <script src="guests/js/custom/utilities/modals/users-search.js"></script>
+    <script src="frontend/plugins/custom/fslightbox/fslightbox.bundle.js"></script>
+    <script src="frontend/js/widgets.bundle.js"></script>
+    <script src="frontend/js/custom/widgets.js"></script>
+    <script src="frontend/js/custom/apps/chat/chat.js"></script>
+    <script src="frontend/js/custom/utilities/modals/upgrade-plan.js"></script>
+    <script src="frontend/js/custom/utilities/modals/create-app.js"></script>
+    <script src="frontend/js/custom/utilities/modals/users-search.js"></script>
 @endsection

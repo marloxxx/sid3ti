@@ -27,14 +27,12 @@
                 <div class="card-body py-5">
                     <!--begin::Icon-->
                     <a href="https://www.instagram.com/{{ $item->instagram }}" target="_blank" class="mx-4">
-                        <img src="{{ asset('guests/media/svg/social-logos/instagram.svg') }}" class="h-30px my-2"
-                            alt="" />
+                        <i class="bi bi-instagram fs-2x text-dark"></i>
                     </a>
                     <!--end::Icon-->
                     <!--begin::Icon-->
-                    <a href="https://wa.me/{{ $item->whatsapp }}" target="_blank" class="mx-4">
-                        <img src="{{ asset('guests/media/svg/social-logos/whatsapp.svg') }}" class="h-30px my-2"
-                            alt="" />
+                    <a href="https://wa.me/{{ $item->phone }}" target="_blank" class="mx-4">
+                        <i class="bi bi-whatsapp fs-2x text-dark"></i>
                     </a>
                     <!--end::Icon-->
                 </div>
@@ -46,4 +44,4 @@
     </div>
     <!--end::Item-->
 @endforeach
-<script src="{{ asset('guests/plugins/custom/fslightbox/fslightbox.bundle.js') }}"></script>
+<script src="{{ asset('plugins/custom/fslightbox/fslightbox.bundle.js') }}"></script>

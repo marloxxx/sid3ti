@@ -32,11 +32,11 @@
                     <tbody>
                         <tr>
                             <td colspan="2" class="text-center">
-                                <a href="{{ asset('images/photo/' . $item->photo) }}"
+                                <a href="{{ asset('images/photo/' . $member->photo) }}"
                                     data-fslightbox="lightbox-hot-sales" class="d-block overlay py-2">
                                     <div
                                         class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-175px mb-2">
-                                        <img src="{{ asset('images/avatar/' . $item->photo) }}" class="rounded"
+                                        <img src="{{ asset('images/avatar/' . $member->photo) }}" class="rounded"
                                             alt="photo">
                                     </div>
                                     <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
@@ -83,5 +83,5 @@
     <!--end::Modal content-->
 </div>
 <!--end::Modal dialog-->
-<script src="{{ asset('guests/js/scripts.bundle.js') }}"></script>
-<script src="{{ asset('guests/plugins/custom/fslightbox/fslightbox.bundle.js') }}"></script>
+<script src="{{ asset('frontend/js/scripts.bundle.js') }}"></script>
+<script src="{{ asset('plugins/custom/fslightbox/fslightbox.bundle.js') }}"></script>
