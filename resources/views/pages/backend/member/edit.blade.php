@@ -264,7 +264,7 @@
     </div>
     <!--end::Container-->
 @endsection
-@section('scripts')
+@push('custom-scripts')
     <script src="{{ asset('js/FormControls.js') }}"></script>
     <script>
         const formEl = $('#form_input');
@@ -279,4 +279,4 @@
             KTFormControls.onCancelForm(formEl);
         });
     </script>
-@endsection
+@endpush
